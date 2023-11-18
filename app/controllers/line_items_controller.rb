@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: %i[ create ]
-  before_action :set_line_item, only: %i[ show edit update destroy ]
+  before_action :set_cart, only: %i[ create decrement ]
+  before_action :set_line_item, only: %i[ show edit update destroy decrement ]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_data
 
   # GET /line_items or /line_items.json
@@ -60,6 +60,24 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to store_index_url, notice: "Line item was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def decrement
+    @line_item.decrement
+
+    respond_to do |format|
+      format.turbo_stream do
+        @current_item = @line_item
+        render turbo_stream: turbo_stream.replace(
+          :cart,
+          partial: 'layouts/cart',
+          locals: { cart: @cart }
+        )
+      end
+      format.html { redirect_to store_index_url, notice: "Decrement item of #{@line_item.product.title}"}
+      format.json { render :show, status: :ok, location: @line_item }
+
     end
   end
 

@@ -1,0 +1,13 @@
+@keyframes product-highlight {
+  0% {
+    background: rgb(136, 211, 255)
+  }
+
+  100% {
+    background: none;
+  }
+}
+
+.product-highlight {
+  animation: product-highlight 3s;
+}
