@@ -30,6 +30,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
+        format.turbo_stream
         format.html { redirect_to store_index_url }
         format.json { render :show, status: :created, location: @line_item }
       else
@@ -57,7 +58,7 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: "Line item was successfully destroyed." }
+      format.html { redirect_to store_index_url, notice: "Line item was successfully destroyed." }
       format.json { head :no_content }
     end
   end
