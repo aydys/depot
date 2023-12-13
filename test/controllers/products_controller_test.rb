@@ -35,6 +35,11 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get order information linked certain product (#who_bought)' do
+    get who_bought_product_url(@product)
+    assert_response :success
+  end
+
   test "should update product" do
     patch product_url(@product), params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @title } }
     assert_redirected_to product_url(@product)

@@ -51,6 +51,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.8)
       activesupport (= 7.0.8)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (7.0.8)
       activemodel (= 7.0.8)
       activesupport (= 7.0.8)
@@ -220,6 +224,7 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
+  activemodel-serializers-xml (~> 1.0)
   bootsnap
   capybara
   debug

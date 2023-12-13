@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy who_bought ]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
 
   # GET /products or /products.json
@@ -57,6 +57,17 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /products/1/who_bought
+
+  def who_bought
+    @orders = @product.orders
+    respond_to do |format|
+      format.html
+      format.json { render json: @product.to_json(include: :orders) }
+      format.xml { render xml: @product.to_xml(include: :orders) }
     end
   end
 
