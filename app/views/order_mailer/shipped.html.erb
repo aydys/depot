@@ -1,0 +1,24 @@
+<h3>Pragmatic Order Shipped</h3>
+
+<p>This is just to let you know that we've shipped your recent order:</p>
+
+<table>
+  <tr>
+    <th colspan="2">Qtry</th>
+    <th>Description</th>
+  </tr>
+  <%= @order.line_items.each do |line_item| %>
+    <% if @current_item == line_item %>
+    <tr class='line-item-highlight'>
+    <% else %>
+    <tr>
+    <% end %>
+      <td class="text-right"><%= line_item.quantity %></td>
+      <td>&times;</td>
+      <td class="pr-2"><%= line_item.product.title %></td>
+      <td class="text-right font-bold">
+        <%= number_to_currency(line_item.total_price) %>
+      </td>
+    </tr>       
+  <% end %>
+</table>
