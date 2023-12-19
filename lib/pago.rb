@@ -19,6 +19,11 @@ class Pago
     end
     sleep 3 unless Rails.env.test?
     Rails.logger.info "Done Processing Payment"
-    OpenStruct.new(succeeded?: true)
+    status = [true, false].sample
+    if status
+      OpenStruct.new(succeeded?: true)
+    else
+      OpenStruct.new(succeeded?: false, error: 'something wrong')
+    end
   end
 end

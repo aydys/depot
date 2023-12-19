@@ -82,7 +82,8 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:title, :description, :image_url, :price)
     end
 
-    def invalid_product
+    def invalid_product(exception)
+      ErrorMessageMailer.notify_error(exception.message).deliver_later
       logger.error "Attempt to access invalid product #{params[:id]}"
       redirect_to products_url, notice: 'Invalid product'
     end

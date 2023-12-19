@@ -1,6 +1,8 @@
 require 'application_system_test_case'
 
-class CartTest < ApplicationSystemTestCase
+class CartsTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   test 'should reveal cart via button' do
     visit store_index_url
 
@@ -21,5 +23,17 @@ class CartTest < ApplicationSystemTestCase
     click_button 'Empty Cart'
 
     assert_no_text 'Your Cart'
+  end
+
+  test 'should send email notification if record not founded' do
+    LineItem.delete_all
+    Cart.delete_all
+
+    visit cart_url(1)
+
+    perform_enqueued_jobs
+    assert_performed_jobs 1
+
+    assert_text 'Invalid cart'
   end
 end

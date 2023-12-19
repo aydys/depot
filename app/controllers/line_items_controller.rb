@@ -92,7 +92,8 @@ class LineItemsController < ApplicationController
       params.require(:line_item).permit(:product_id)
     end
 
-    def invalid_data
+    def invalid_data(exception)
+      ErrorMessageMailer.notify_error(exception.message).deliver_later
       redirect_to store_index_url, notice: 'Invalid Data'
     end
 end

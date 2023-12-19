@@ -26,6 +26,11 @@
     <%= form.email_field :email, class: "input-field" %>
   </div>
 
+  <div class="my-5">
+    <%= form.label :ship_date %>
+    <%= form.date_field :ship_date %>
+  </div>
+
   <div data-controller='payment'>
     <div class="my-5">
       <%= form.label :pay_type %>
