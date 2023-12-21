@@ -72,6 +72,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    bcrypt (3.1.20)
     bindex (0.8.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
@@ -225,6 +226,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemodel-serializers-xml (~> 1.0)
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
