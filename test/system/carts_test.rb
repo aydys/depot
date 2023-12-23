@@ -2,6 +2,7 @@ require 'application_system_test_case'
 
 class CartsTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
+  include AuthenticationHelpers
 
   test 'should reveal cart via button' do
     visit store_index_url

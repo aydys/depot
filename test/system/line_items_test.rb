@@ -1,6 +1,8 @@
 require 'application_system_test_case'
 
 class LineItemsTest < ApplicationSystemTestCase
+  include AuthenticationHelpers
+
   test 'should highlight item after adding to cart' do
     visit store_index_url
 

@@ -4,6 +4,7 @@ require 'ostruct'
 
 class OrdersTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
+  include AuthenticationHelpers
 
   setup do
     @order = orders(:one)
@@ -183,9 +184,5 @@ class OrdersTest < ApplicationSystemTestCase
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal 'Pragmatic Store Order Shipped', mail.subject
-  end
-
-  test 'should send email notification if record not founded' do
-
   end
 end

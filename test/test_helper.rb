@@ -19,6 +19,7 @@ module AuthenticationHelpers
       fill_in :name, with: user.name
       fill_in :password, with: 'secret'
       click_on 'Login'
+      sleep 0.7
     else
       post login_url, params: { name: user.name, password: 'secret' }
     end
@@ -34,9 +35,5 @@ module AuthenticationHelpers
 end
 
 class ActionDispatch::IntegrationTest
-  include AuthenticationHelpers
-end
-
-class ActionDispatch::SystemTestCase
   include AuthenticationHelpers
 end

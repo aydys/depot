@@ -60,4 +60,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to products_url
   end
+
+  test 'rejection after logout user' do
+    logout
+
+    get product_url(products(:one))
+
+    assert_redirected_to login_url
+    assert_equal 'Please log in', flash[:notice]
+  end
 end

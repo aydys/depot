@@ -18,12 +18,19 @@
     <%= form.text_field :name, class: "input-field" %>
   </div>
 
+  <% if action_name != 'new' %>
+    <div class="my-5">
+      <%= form.label :current_password, 'Current password:'%>
+      <%= form.password_field :current_password, class: 'input-field' %>
+    </div>
+  <% end %>
+
   <div class="my-5">
     <%= form.label :password, 'Password:' %>
     <%= form.password_field :password, class: 'input-field' %>
-</div>
+  </div>
 
-<div class="my-5">
+  <div class="my-5">
     <%= form.label :password_confirmation, 'Confirm:' %>
     <%= form.password_field :password_confirmation, class: "input-field" %>
   </div>
