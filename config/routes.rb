@@ -18,6 +18,6 @@ Rails.application.routes.draw do
     resources :line_items do
       post 'decrement', on: :member
     end
-    root 'store#index', as: 'store_index'
+    root 'store#index', as: 'store_index', via: :all
   end
 end

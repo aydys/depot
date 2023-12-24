@@ -26,12 +26,12 @@ class OrdersTest < ApplicationSystemTestCase
     click_on 'New order'
 
     fill_in "Address", with: @order.address
-    fill_in "Email", with: @order.email
+    fill_in "E-mail", with: @order.email
     fill_in "Name", with: @order.name
     select @order.pay_type, from: 'Pay type'
     click_on "Place Order"
 
-    assert_text "Thank you for your order."
+    assert_text "Thank you for your order"
   end
 
   test "should update Order" do
@@ -39,7 +39,7 @@ class OrdersTest < ApplicationSystemTestCase
     click_on "Edit this order", match: :first
 
     fill_in "Address", with: @order.address
-    fill_in "Email", with: @order.email
+    fill_in "E-mail", with: @order.email
     fill_in "Name", with: @order.name
     select @order.pay_type, from: 'Pay type'
     click_on "Place Order"
@@ -61,35 +61,35 @@ class OrdersTest < ApplicationSystemTestCase
 
     click_on 'Checkout'
 
-    assert has_no_field? 'Routing number'
-    assert has_no_field? 'Account number'
-    assert has_no_field? 'Credit card number'
-    assert has_no_field? 'Expiration date'
-    assert has_no_field? 'Po number'
+    assert has_no_field? 'Routing #'
+    assert has_no_field? 'Account #'
+    assert has_no_field? 'CC #'
+    assert has_no_field? 'Expiry'
+    assert has_no_field? 'PO #'
 
     select 'Check', from: 'Pay type'
 
-    assert has_field? 'Routing number'
-    assert has_field? 'Account number'
-    assert has_no_field? 'Credit card number'
-    assert has_no_field? 'Expiration date'
-    assert has_no_field? 'Po number'
+    assert has_field? 'Routing #'
+    assert has_field? 'Account #'
+    assert has_no_field? 'CC #'
+    assert has_no_field? 'Expiry'
+    assert has_no_field? 'PO #'
 
-    select 'Credit card', from: 'Pay type'
+    select 'Credit Card', from: 'Pay type'
 
-    assert has_no_field? 'Routing number'
-    assert has_no_field? 'Account_number'
-    assert has_field? 'Credit card number'
-    assert has_field? 'Expiration date'
-    assert has_no_field? 'Po number'
+    assert has_no_field? 'Routing #'
+    assert has_no_field? 'Account #'
+    assert has_field? 'CC #'
+    assert has_field? 'Expiry'
+    assert has_no_field? 'PO #'
 
-    select 'Purchase order', from: 'Pay type'
+    select 'Purchase Order', from: 'Pay type'
 
-    assert has_no_field? 'Routing number'
-    assert has_no_field? 'Account_number'
-    assert has_no_field? 'Credit card number'
-    assert has_no_field? 'Expiration date'
-    assert has_field? 'Po number'
+    assert has_no_field? 'Routing #'
+    assert has_no_field? 'Account #'
+    assert has_no_field? 'CC #'
+    assert has_no_field? 'Expiry'
+    assert has_field? 'PO #'
   end
 
   test 'check order and delivery' do
@@ -104,11 +104,12 @@ class OrdersTest < ApplicationSystemTestCase
 
     fill_in 'Name', with: 'Dave Thomas'
     fill_in 'Address', with: '123 Main Street'
-    fill_in 'Email', with: 'dave@example.com'
+    fill_in 'E-mail', with: 'dave@example.com'
 
     select 'Check', from: 'Pay type'
-    fill_in 'Routing number', with: '123456'
-    fill_in 'Account number', with: '987654'
+    sleep 1
+    fill_in 'Routing #', with: '123456'
+    fill_in 'Account #', with: '987654'
 
     Pago.stub :make_payment, OpenStruct.new(succeeded?: true) do
       click_button 'Place Order'
@@ -147,11 +148,11 @@ class OrdersTest < ApplicationSystemTestCase
 
     fill_in 'Name', with: 'Dave Thomas'
     fill_in 'Address', with: '123 Main Street'
-    fill_in 'Email', with: 'dave@example.com'
+    fill_in 'E-mail', with: 'dave@example.com'
 
     select 'Check', from: 'Pay type'
-    fill_in 'Routing number', with: '123456'
-    fill_in 'Account number', with: '987654'
+    fill_in 'Routing #', with: '123456'
+    fill_in 'Account #', with: '987654'
 
     payment_stub = OpenStruct.new(succeeded?: false, error: 'something wrong')
     Pago.stub :make_payment, payment_stub do
