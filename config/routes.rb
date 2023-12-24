@@ -8,18 +8,16 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :orders
-  resources :line_items do
-    post 'decrement', on: :member
-  end
-
-  resources :carts
-  root 'store#index', as: 'store_index'
   resources :products do
     get 'who_bought', on: :member
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  scope '(:locale)' do
+    resources :orders
+    resources :carts
+    resources :line_items do
+      post 'decrement', on: :member
+    end
+    root 'store#index', as: 'store_index'
+  end
 end
