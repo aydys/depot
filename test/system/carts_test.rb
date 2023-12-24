@@ -21,7 +21,7 @@ class CartsTest < ApplicationSystemTestCase
 
     assert_text 'Your Cart'
 
-    click_button 'Empty Cart'
+    click_button 'Empty cart'
 
     assert_no_text 'Your Cart'
   end

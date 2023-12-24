@@ -19,7 +19,7 @@ module AuthenticationHelpers
       fill_in :name, with: user.name
       fill_in :password, with: 'secret'
       click_on 'Login'
-      sleep 0.7
+      sleep 2
     else
       post login_url, params: { name: user.name, password: 'secret' }
     end
