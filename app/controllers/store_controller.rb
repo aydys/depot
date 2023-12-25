@@ -7,7 +7,11 @@ class StoreController < ApplicationController
   before_action :set_cart
 
   def index
-    @products = Product.order(:title)
-    @counter = session[:counter] if session[:counter]
+    if params[:set_locale]
+      redirect_to store_index_url(locale: params[:set_locale])
+    else
+      @products = Product.order(:title)
+      @counter = session[:counter] if session[:counter]
+    end
   end
 end
