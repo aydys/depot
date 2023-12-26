@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_26_063253) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_26_091745) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -89,6 +89,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_063253) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "locale", default: "en"
+  end
+
+  create_table "support_requests", force: :cascade do |t|
+    t.string "email"
+    t.string "subject"
+    t.text "body"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_support_requests_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
