@@ -13,6 +13,12 @@ class Product < ApplicationRecord
 
   before_destroy :ensure_not_referenced_by_any_line_item
 
+  has_rich_text :description
+
+  def description
+    rich_text_description || build_rich_text_description(body: read_attribute(:description))
+  end
+
   private
 
   def ensure_not_referenced_by_any_line_item

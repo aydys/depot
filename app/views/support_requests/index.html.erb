@@ -11,25 +11,25 @@
         <%= support_request.body %>
       </blockquote>
     </p>
-    <% if support_request.order %>
-      <h3 class='font-medium mt-5'>Recent Order</h3>
+    <% if support_request.get_orders %>
+      <% support_request.get_orders.each do |order| %>
       <dl class='py-2.5'>
         <dt>Name</dt>
-        <dd><%= support_request.order.name %></dd>
+        <dd><%= order.name %></dd>
 
         <dt>Email</dt>
-        <dd><%= support_request.order.email %></dd>
+        <dd><%= order.email %></dd>
 
         <dt>Address</dt>
-        <dd><%= support_request.order.address %></dd>
+        <dd><%= order.address %></dd>
 
         <dt>Type</dt>
-        <dd><%= support_request.order.pay_type %></dd>
+        <dd><%= order.pay_type %></dd>
 
         <dt>Line Items</dt>
         <dd>
           <ul>
-            <% support_request.order.line_items.each do |line_item| %>
+            <% order.line_items.each do |line_item| %>
               <li>
                 <%= line_item.product.title %>
                 <%= line_item.product.price %>
@@ -38,6 +38,7 @@
           </ul>
         </dd>
       </dl>
+      <% end %>
     <% else %>
       <h3 class="my-2 p-2 bg-pink-200 text-center">No associated order</h3>
     <% end %>
