@@ -75,3 +75,7 @@ group :test do
 end
 
 gem "activemodel-serializers-xml", "~> 1.0"
+
+gem "pg", "~> 1.5", :group => :production
+
+gem "redis", "~> 5.0", :group => :production

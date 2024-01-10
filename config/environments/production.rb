@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "active_support/core_ext/numeric/bytes"
 
 Rails.application.configure do
   # Prepare the ingress controller used to receive mail
@@ -93,4 +94,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.logger = Logger.new(config.paths['log'].first, 10, 10.megabytes)
 end
