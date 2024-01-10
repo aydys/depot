@@ -2,17 +2,23 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:14
+    image: postgres:14-alpine
     volumes:
       - pgdata:/var/lib/postgres/data
     environment:
-      - POSTGRES_PASSWORD=password
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_password
   
+  redis:
+    image: redis:alpine
 
   web:
     build: .
     volumes:
       - ./log:/home/app/depot/log
+    environment:
+      POSTGRES_PASSWORD: /run/secrets/db_password
     secrets:
       - source: master_key
         target: /home/app/depot/config/master.key
@@ -20,10 +26,13 @@ services:
       - "8001:80"
     depends_on:
       - db
+      - redis
 
 secrets:
   master_key:
     file: ./config/master.key
+  db_password:
+    file: ./secrets/db_secret.txt
 
 volumes:
   pgdata:
